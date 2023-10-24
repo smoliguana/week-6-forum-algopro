@@ -1,0 +1,167 @@
+#forum task 1#
+students = ['lloyd', 'alice','tyler']
+lloyd = {
+"name": "Lloyd",
+"homework": [90.0,97.0,75.0,92.0],
+"quizzes": [88.0,40.0,94.0],
+"tests": [75.0,90.0]
+}
+alice = {
+"name": "Alice",
+"homework": [100.0, 92.0, 98.0, 100.0],
+"quizzes": [82.0, 83.0, 91.0],
+"tests": [89.0, 97.0]
+}
+tyler = {
+"name": "Tyler",
+"homework": [0.0, 87.0, 75.0, 22.0],
+"quizzes": [0.0, 75.0, 78.0],
+"tests": [100.0, 100.0]
+}
+
+def average(scores):
+    total = sum(scores)
+    total = float(total)
+    average = total / len(scores)
+    return average
+
+def get_average(students):
+    for student in students:
+        homework = average(student["homework"])
+        quizzes = average(student["quizzes"])
+        tests = average(student["tests"])
+    
+        weighted_average = homework * 0.1 + quizzes * 0.3 + tests * 0.6
+    
+    return weighted_average
+def get_letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+
+def get_class_average(students):
+    results = []
+    for student in students:
+        avg = get_average(student)
+        results.append(avg)
+    return average(results)
+
+class_avg = get_class_average([lloyd, alice, tyler])
+class_letter_grade = get_letter_grade(class_avg)
+
+print(f"Class Average: {class_avg}")
+print(f"Class Letter Grade: {class_letter_grade}")
+
+    #forum task 2
+course_num = ("COP 2510", "EGN 3000L", "MAC 2281", "MUH 3016", "PHY 2048")
+course_num_name = {
+    "COP 2510" : "Programming Concepts",
+    "EGN 3000L" : "Foundations of Engineering Lab",
+    "MAC 2281" : "Calculus I",
+    "MUH 3016" : "Survey of Jazz",
+    "PHY 2048" : "General Physics I"
+}
+course_num_ins = {
+    "COP 2510" : "Z. Beasley",
+    "EGN 3000L" : "J. Anderson",
+    "MAC 2281" : "A. Makaryus",
+    "MUH 3016" : "A. Wilkins",
+    "PHY 2048" : "G. Pradhan"
+}
+
+course_num_time = {
+    "COP 2510" : "MW 12:30pm – 1:45pm",
+    "EGN 3000L" : "TR 11:00am – 12:15pm",
+    "MAC 2281" : "MW 9:30am – 10:45am",
+    "MUH 3016" : "online asynchronous",
+    "PHY 2048" : "TR 5:00pm – 6:15pm"
+}
+
+user_input = input("Enter a course number: ")
+
+
+if user_input in course_num_name:
+    course_name = course_num_name[user_input]
+    instructor = course_num_ins[user_input]
+    class_time = course_num_time[user_input]
+
+    print("The course details are:")
+    print(f"Course Name: {course_name}")
+    print(f"Instructor: {instructor}")
+    print(f"Class Times: {class_time}")
+else:
+    print(f"{user_input} is an invalid course number.")
+
+#forum task 3
+days_of_week = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+
+
+sales = []
+
+
+def get_sales(day):
+    while True:
+        try:
+            sales_input = float(input(f"Enter the sales for {day} in $ : "))
+            print("Enter the sales for", {day}, "in $ : ",sales_input)
+            if sales_input < 0:
+                raise ValueError("Input was invalid, please re-enter the sales for {day}")
+            return sales_input
+        except ValueError as e:
+            print(e)
+
+
+for day in days_of_week:
+    day_sales = get_sales(day)
+    sales.append(day_sales)
+
+
+total_sales = sum(sales)
+
+
+min_sale = min(sales)
+max_sale = max(sales)
+
+
+total_sales_formatted = "${:,.2f}".format(total_sales)
+min_sale_formatted = "${:,.2f}".format(min_sale)
+max_sale_formatted = "${:,.2f}".format(max_sale)
+
+
+print(f"The total sales is: {total_sales_formatted}")
+print(f"The minimum sale amount was: {min_sale_formatted}")
+print(f"The maximum sale amount was: {max_sale_formatted}")
+
+
+#forum task 4
+morse_code_dict = {
+    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+    'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+    'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..',
+    '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.'
+}
+
+
+user_input = input("Enter the string to be converted to Morse code: ")
+
+
+def text_to_morse(text):
+    morse_code = ""
+    for char in text.upper():
+        if char in morse_code_dict:
+            morse_code += morse_code_dict[char] + " "
+        else:
+            morse_code += char + " "  
+    return morse_code.strip()
+
+
+morse_result = text_to_morse(user_input)
+print("Text :",user_input)
+print("Morse Code:", morse_result)
